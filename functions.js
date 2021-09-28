@@ -43,23 +43,71 @@ const functions = {
     };
   },
   caesar: {
-    encrypt: (mssg) => {
+    encrypt: (mssg, key) => {
       const letters = 'abcdefghijklmnopqrstuvwxyz';
+      const cap_letters = letters.toUpperCase();
       let final = '';
       for (let i = 0; i < mssg.length; i++) {
         let x = mssg.charAt(i);
-        let u = letters.indexOf(x);
-        final += letters.charAt(u + 1);
+        if (letters.search(x) == -1) {
+          if (cap_letters.search(x) != -1) {
+            let u = cap_letters.indexOf(x);
+            let z = u + key;
+            // Number issue
+            if (z > 25) {
+              while (z > 25) {
+                z = z - 25;
+              }
+              final += cap_letters.charAt(z - 1);
+            } else if (z < 0) {
+              while (z < 0) {
+                z = z + 25;
+              }
+              final += cap_letters.charAt(z);
+            } else {
+              final += cap_letters.charAt(z);
+            }
+          } else {
+            final += x;
+          }
+        } else {
+          let u = letters.indexOf(x);
+          let z = u + key;
+          // Number issue
+          if (z > 25) {
+            while (z > 25) {
+              z = z - 25;
+            }
+            final += letters.charAt(z);
+          } else if (z < 0) {
+            while (z > 25) {
+              z = z + 25;
+            }
+            final += letters.charAt(z);
+          } else {
+            final += letters.charAt(z);
+          }
+        }
       }
       return final;
     },
-    decrypt: (mssg) => {
+    decrypt: (mssg, key) => {
       const letters = 'abcdefghijklmnopqrstuvwxyz';
+      const cap_letters = letters.toUpperCase();
       let final = '';
       for (let i = 0; i < mssg.length; i++) {
         let x = mssg.charAt(i);
-        let u = letters.indexOf(x);
-        final += letters.charAt(u + 1);
+        if (letters.search(x) == -1) {
+          if (cap_letters.search(x) != -1) {
+            let u = cap_letters.indexOf(x);
+            final += cap_letters.charAt(u - key);
+          } else {
+            final += x;
+          }
+        } else {
+          let u = letters.indexOf(x);
+          final += letters.charAt(u - key);
+        }
       }
       return final;
     },
