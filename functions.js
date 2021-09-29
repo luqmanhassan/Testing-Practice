@@ -53,17 +53,24 @@ const functions = {
           if (cap_letters.search(x) != -1) {
             let u = cap_letters.indexOf(x);
             let z = u + key;
-            // Number issue
             if (z > 25) {
-              while (z > 25) {
-                z = z - 25;
+              let val = 25 - u;
+              while (key > val) {
+                key = key - val;
+                u = 0;
+                val = 25;
+                z = u + key;
               }
               final += cap_letters.charAt(z - 1);
             } else if (z < 0) {
-              while (z < 0) {
-                z = z + 25;
+              let val = 0 - u;
+              while (key < val) {
+                key = key - val;
+                u = 25;
+                val = -25;
+                z = u + key;
               }
-              final += cap_letters.charAt(z);
+              final += cap_letters.charAt(z + 1);
             } else {
               final += cap_letters.charAt(z);
             }

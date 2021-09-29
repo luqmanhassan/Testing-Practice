@@ -50,6 +50,5 @@ test('Encrypt and Decrypt mssgs', () => {
 
   // Large Numbers
   expect(functions.caesar.encrypt('A', 30)).toBe('E');
-  expect(functions.caesar.encrypt('A', -30)).toBe('W');
-  // expect(functions.caesar.decrypt('e', 30)).toBe('e');
+  expect(functions.caesar.encrypt('Z', -30)).toBe('V');
 });
