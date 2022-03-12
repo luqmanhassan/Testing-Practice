@@ -52,3 +52,18 @@ test('Encrypt and Decrypt mssgs', () => {
   expect(functions.caesar.encrypt('A', 30)).toBe('E');
   expect(functions.caesar.encrypt('Z', -30)).toBe('V');
 });
+/*
+function forEach(items, callback) {
+  for (let index = 0; index < items.length; index++) {
+    callback(items[index]);
+  }
+}
+// forEach([0, 1], mockCallback);
+*/
+
+const myMock = jest.fn(() => {
+  console.log('Inside Mock');
+});
+
+myMock();
+console.log(myMock.mock.calls);
